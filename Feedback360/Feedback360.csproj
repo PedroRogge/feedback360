@@ -151,7 +151,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ComandoBancoDeDados.cs" />
+    <Compile Include="Models\ComandosBancoDeDados.cs" />
+    <Compile Include="Models\FeedbackCompleto.cs" />
     <Compile Include="Models\Manter.cs" />
     <Compile Include="Models\Mudar.cs" />
     <Compile Include="Models\Melhorar.cs" />
@@ -159,6 +160,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Pedro.jpg" />
+    <Content Include="Content\Andre.jpg" />
+    <Content Include="Content\Lucas.jpg" />
+    <Content Include="Content\Eduardo.jpg" />
+    <Content Include="Content\Guilhere.jpg" />
+    <Content Include="Content\Avatar4.jpg" />
+    <Content Include="Content\Avatar5.jpg" />
+    <Content Include="Content\Avatar6.jpg" />
+    <Content Include="Content\Avatar7.jpg" />
+    <Content Include="Content\Avatar8.jpg" />
+    <Content Include="Content\Avatar9.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -194,9 +206,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Carregar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

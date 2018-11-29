@@ -1,0 +1,39 @@
+﻿@model Feedback360.Models.FeedbackCompleto
+<h1>
+    @Model.Pessoa.Nome
+</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>Manter</td>
+            <td>Melhorar</td>
+            <td>Mudar</td>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.MaxCount; i++)
+        {
+            <tr>
+                <td>
+                    @if (Model.Manter.Count > i)
+                    {
+                        @Model.Manter[i].Observacao
+                    }
+                </td>
+                <td>
+                    @if (Model.Melhorar.Count > i)
+                    {
+                        @Model.Melhorar[i].Observacao
+                    }
+                </td>
+                <td>
+                    @if (Model.Mudar.Count > i)
+                    {
+                        @Model.Mudar[i].Observacao
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

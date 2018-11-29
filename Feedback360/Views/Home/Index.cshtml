@@ -1,7 +1,23 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-}
+﻿@model List<Feedback360.Models.Pessoa>
+<div class="col-md-12">
+    @foreach (var pessoa in Model)
+    {
+        <form action="~/Home/CarregarFeed">
+            <button type="submit" class="col-md-2 btn btn-primary minhasPessoasDiv">
+                <h1>@pessoa.Nome</h1>
+            </button>
+            <input type="hidden" name="pessoaId" value="@pessoa.PessoaId" />
+        </form>
+    }
+</div>
+<style>
 
-<h2>Index</h2>
+    .minhasPessoasDiv {
+        height: 185px;
+        margin: 10px;
+    }
 
+        .minhasPessoasDiv h1 {
+            padding-top: 42px;
+        }
+</style>
