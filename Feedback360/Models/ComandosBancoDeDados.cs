@@ -9,10 +9,14 @@ namespace Feedback360.Models
     {
         private string ConnectionString
         {
-            get { return @"Data Source=senacturmati.database.windows.net;
-                          Initial Catalog=Senac;
-                          User id=senac;
-                          Password=Teste123#"; }
+            //get { return @"Data Source=senacturmati.database.windows.net;
+            //              Initial Catalog=Senac;
+            //              User id=senac;
+            //              Password=Teste123#"; }
+
+            get { return @"data source=.\SQLEXPRESS;
+                           initial catalog=Senac;persist security info=True; 
+                           Integrated Security=SSPI;"; }
         }
         public List<Mudar> BuscarMudarPorPessoaId(Guid pessoaID)
         {
@@ -20,7 +24,7 @@ namespace Feedback360.Models
             using (SqlConnection con = new SqlConnection(ConnectionString))
             {
                 con.Open();
-                using (SqlCommand command = new SqlCommand("SELECT * FROM Mudar_Andre where PessoaId = @PessoaId", con))
+                using (SqlCommand command = new SqlCommand("SELECT * FROM Mudar where PessoaId = @PessoaId", con))
                 {
                     command.Parameters.Add("@PessoaId", SqlDbType.UniqueIdentifier).Value = pessoaID;
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -44,7 +48,7 @@ namespace Feedback360.Models
             using (SqlConnection con = new SqlConnection(ConnectionString))
             {
                 con.Open();
-                using (SqlCommand command = new SqlCommand("SELECT * FROM Manter_Andre where PessoaId = @PessoaId", con))
+                using (SqlCommand command = new SqlCommand("SELECT * FROM Manter where PessoaId = @PessoaId", con))
                 {
                     command.Parameters.Add("@PessoaId", SqlDbType.UniqueIdentifier).Value = pessoaID;
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -68,7 +72,7 @@ namespace Feedback360.Models
             using (SqlConnection con = new SqlConnection(ConnectionString))
             {
                 con.Open();
-                using (SqlCommand command = new SqlCommand("SELECT * FROM Melhorar_Andre where PessoaId = @PessoaId", con))
+                using (SqlCommand command = new SqlCommand("SELECT * FROM Melhorar where PessoaId = @PessoaId", con))
                 {
                     command.Parameters.Add("@PessoaId", SqlDbType.UniqueIdentifier).Value = pessoaID;
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -92,7 +96,7 @@ namespace Feedback360.Models
             using (SqlConnection con = new SqlConnection(ConnectionString))
             {
                 con.Open();
-                using (SqlCommand command = new SqlCommand("SELECT * FROM Pessoa_Andre where PessoaId = @PessoaId", con))
+                using (SqlCommand command = new SqlCommand("SELECT * FROM Pessoa where PessoaId = @PessoaId", con))
                 {
                     command.Parameters.Add("@PessoaId", SqlDbType.UniqueIdentifier).Value = pessoaID;
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -113,7 +117,7 @@ namespace Feedback360.Models
             using (SqlConnection con = new SqlConnection(ConnectionString))
             {
                 con.Open();
-                using (SqlCommand command = new SqlCommand("SELECT * FROM Pessoa_Andre", con))
+                using (SqlCommand command = new SqlCommand("SELECT * FROM Pessoa", con))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -128,6 +132,47 @@ namespace Feedback360.Models
                 }
             }
             return lista;
+        }
+        public Login BuscarUsuario(Login login)
+        {
+            login.UsuarioSenha = Criptografar(login.UsuarioSenha);
+            Login usuario = null;
+            using (SqlConnection con = new SqlConnection(ConnectionString))
+            {
+                con.Open();
+                using (SqlCommand command = new SqlCommand(
+                    "SELECT top 1 * FROM Usuarios where Login = @UsuarioLogin and Senha = @UsurioSenha", con))
+                {
+                    command.Parameters.Add("@UsuarioLogin", SqlDbType.VarChar).Value = login.UsuarioLogin;
+                    command.Parameters.Add("@UsurioSenha", SqlDbType.VarChar).Value = login.UsuarioSenha;
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            usuario = new Login();
+                            usuario.UsuarioLogin = (string)reader["Login"];
+                            usuario.UsuarioSenha = (string)reader["Senha"];
+                        }
+                    }
+                }
+            }
+            return usuario;
+        }
+
+        public static string Criptografar(string valor)
+        {
+            string chaveCripto = "André";
+            Byte[] cript = System.Text.ASCIIEncoding.ASCII.GetBytes(valor);
+            chaveCripto = Convert.ToBase64String(cript);
+            return chaveCripto;
+        }
+
+        public static string Descriptografar(string valor)
+        {
+            string chaveCripto = "André";
+            Byte[] cript = Convert.FromBase64String(valor);
+            chaveCripto = System.Text.ASCIIEncoding.ASCII.GetString(cript);
+            return chaveCripto;
         }
     }
 }
