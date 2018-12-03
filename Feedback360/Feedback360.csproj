@@ -163,16 +163,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Pedro.jpg" />
-    <Content Include="Content\Andre.jpg" />
+    <Content Include="Content\André.jpg" />
     <Content Include="Content\Lucas.jpg" />
+    <Content Include="Content\Guilherme.jpg" />
     <Content Include="Content\Eduardo.jpg" />
-    <Content Include="Content\Guilhere.jpg" />
-    <Content Include="Content\Edmar.jpg" />
     <Content Include="Content\Alysson.jpg" />
-    <Content Include="Content\JoãoV.jpg" />
+    <Content Include="Content\Trindade.jpg" />
     <Content Include="Content\Felipe.jpg" />
-    <Content Include="Content\.jpg" />
-    <Content Include="Content\Avatar9.jpg" />
+    <Content Include="Content\Edmar.jpg" />
+    <Content Include="Content\Bethoven.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />

@@ -18,7 +18,7 @@ namespace Feedback360.Controllers
             var listaDePessoas = comandos.BuscarPessoas();
             return View(listaDePessoas);
         }
-        public ActionResult CarregarFeed(Guid pessoaId)
+        public ActionResult Carregar(Guid pessoaId)
         {
             ComandosBancoDeDados comandos = new ComandosBancoDeDados();
             var pessoa = comandos.BuscarPessoaPorPessoaId(pessoaId);
