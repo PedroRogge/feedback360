@@ -9,14 +9,14 @@ namespace Feedback360.Models
     {
         private string ConnectionString
         {
-            //get { return @"Data Source=senacturmati.database.windows.net;
-            //              Initial Catalog=Senac;
-            //              User id=senac;
-            //              Password=Teste123#"; }
+            get { return @"Data Source=senacturmati.database.windows.net;
+                          Initial Catalog=Senac;
+                          User id=senac;
+                          Password=Teste123#"; }
 
-            get { return @"data source=.\SQLEXPRESS;
-                           initial catalog=Senac;persist security info=True; 
-                           Integrated Security=SSPI;"; }
+            //get { return @"data source=.\SQLEXPRESS;
+            //               initial catalog=Senac;persist security info=True; 
+            //               Integrated Security=SSPI;"; }
         }
         public List<Mudar> BuscarMudarPorPessoaId(Guid pessoaID)
         {
@@ -24,7 +24,7 @@ namespace Feedback360.Models
             using (SqlConnection con = new SqlConnection(ConnectionString))
             {
                 con.Open();
-                using (SqlCommand command = new SqlCommand("SELECT * FROM Mudar where PessoaId = @PessoaId", con))
+                using (SqlCommand command = new SqlCommand("SELECT * FROM Mudar_Andre where PessoaId = @PessoaId", con))
                 {
                     command.Parameters.Add("@PessoaId", SqlDbType.UniqueIdentifier).Value = pessoaID;
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -48,7 +48,7 @@ namespace Feedback360.Models
             using (SqlConnection con = new SqlConnection(ConnectionString))
             {
                 con.Open();
-                using (SqlCommand command = new SqlCommand("SELECT * FROM Manter where PessoaId = @PessoaId", con))
+                using (SqlCommand command = new SqlCommand("SELECT * FROM Manter_Andre where PessoaId = @PessoaId", con))
                 {
                     command.Parameters.Add("@PessoaId", SqlDbType.UniqueIdentifier).Value = pessoaID;
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -72,7 +72,7 @@ namespace Feedback360.Models
             using (SqlConnection con = new SqlConnection(ConnectionString))
             {
                 con.Open();
-                using (SqlCommand command = new SqlCommand("SELECT * FROM Melhorar where PessoaId = @PessoaId", con))
+                using (SqlCommand command = new SqlCommand("SELECT * FROM Melhorar_Andre where PessoaId = @PessoaId", con))
                 {
                     command.Parameters.Add("@PessoaId", SqlDbType.UniqueIdentifier).Value = pessoaID;
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -96,7 +96,7 @@ namespace Feedback360.Models
             using (SqlConnection con = new SqlConnection(ConnectionString))
             {
                 con.Open();
-                using (SqlCommand command = new SqlCommand("SELECT * FROM Pessoa where PessoaId = @PessoaId", con))
+                using (SqlCommand command = new SqlCommand("SELECT * FROM Pessoa_Andre where PessoaId = @PessoaId", con))
                 {
                     command.Parameters.Add("@PessoaId", SqlDbType.UniqueIdentifier).Value = pessoaID;
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -117,7 +117,7 @@ namespace Feedback360.Models
             using (SqlConnection con = new SqlConnection(ConnectionString))
             {
                 con.Open();
-                using (SqlCommand command = new SqlCommand("SELECT * FROM Pessoa", con))
+                using (SqlCommand command = new SqlCommand("SELECT * FROM Pessoa_Andre", con))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -141,17 +141,17 @@ namespace Feedback360.Models
             {
                 con.Open();
                 using (SqlCommand command = new SqlCommand(
-                    "SELECT top 1 * FROM Usuarios where Login = @UsuarioLogin and Senha = @UsurioSenha", con))
+                    "SELECT top 1 * FROM UsuariosFeedback where UsuarioLogin = @UsuarioLogin and UsuarioSenha = @UsuarioSenha", con))
                 {
                     command.Parameters.Add("@UsuarioLogin", SqlDbType.VarChar).Value = login.UsuarioLogin;
-                    command.Parameters.Add("@UsurioSenha", SqlDbType.VarChar).Value = login.UsuarioSenha;
+                    command.Parameters.Add("@UsuarioSenha", SqlDbType.VarChar).Value = login.UsuarioSenha;
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
                             usuario = new Login();
-                            usuario.UsuarioLogin = (string)reader["Login"];
-                            usuario.UsuarioSenha = (string)reader["Senha"];
+                            usuario.UsuarioLogin = (string)reader["UsuarioLogin"];
+                            usuario.UsuarioSenha = (string)reader["UsuarioSenha"];
                         }
                     }
                 }

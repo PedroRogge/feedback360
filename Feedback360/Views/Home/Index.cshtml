@@ -1,24 +1,5 @@
-﻿@model List<Feedback360.Models.Pessoa>
-<div class="col-md-12">
-    @foreach (var pessoa in Model)
-    {
-        <div class="form-group col-md-3 text-center"    >
-            <form action="~/Home/CarregarFeed">
-                @{
-                    var caminhoFoto = $"/Content/{pessoa.Nome}.jpg";
-                }
-                <h1>@pessoa.Nome</h1>
-                <button type="submit" class="col-md-12 btn btn-primary minhasPessoasDiv" style="background-image: url(@caminhoFoto)"></button>
-                <input type="hidden" name="pessoaId" value="@pessoa.PessoaId" />
-            </form>
-        </div>
-    }
-</div>
+﻿
 
-<style>
 
-    .minhasPessoasDiv {
-        height: 185px;
-        margin: 10px;
-    }
-</style>
+<h2>Feedback</h2>
+

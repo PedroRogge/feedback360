@@ -30,11 +30,11 @@ namespace Feedback360.Controllers
         {
             if (AlunoLogado)
             {
-                return RedirectToAction("Index", "Aluno");
+                return RedirectToAction("Index", "Feedback");
             }
             else
             {
-                return RedirectToAction("Login", "Aluno");
+                return RedirectToAction("Logar", "Feedback");
             }
         }
     }

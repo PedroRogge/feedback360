@@ -49,18 +49,15 @@ namespace Feedback360.Controllers
 
             return View(feedback);
         }
-        public ActionResult Login()
+
+        [HttpGet]
+        public ActionResult Logar()
         {
-            if (AlunoLogado)
-            {
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return View();
-            }
+            return View();
         }
 
+
+        [HttpPost]
         public ActionResult Logar(Login login)
         {
             ComandosBancoDeDados comandos = new ComandosBancoDeDados();
@@ -69,11 +66,12 @@ namespace Feedback360.Controllers
             if (usuario != null)
             {
                 AlunoLogado = true;
-                return RedirectToAction("Index");
+                return RedirectToAction("Index/Home");
             }
             else
             {
-                return RedirectToAction("Login");
+                TempData["ErroAoLogar"] = "Usuário ou senha inválidos";
+                return View();
             }
         }
     }
