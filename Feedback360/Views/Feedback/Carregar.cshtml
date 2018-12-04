@@ -6,8 +6,7 @@
         var caminhoFoto = $"/Content/ {@Model.Pessoa.Nome}.jpg";
     }
     <h1>@Model.Pessoa.Nome</h1>
-    <button type="submit" class="col-md-12 btn btn-primary minhasPessoasDiv" style="background-image: url(@caminhoFoto)"></button>
-    @Model.Pessoa.Nome
+   <type="text" class="minhasPessoasDiv" style="background-image: url(@caminhoFoto)" />
 
 <table class="table table-striped">
     <thead>
@@ -20,34 +19,42 @@
     <tbody>
         @for (int i = 0; i < Model.MaxCount; i++)
         {
-            <tr>
-                <td>
-                    @if (Model.Manter.Count > i)
-                    {
-                        @Model.Manter[i].Observacao
-                    }
-                </td>
-                <td>
-                    @if (Model.Melhorar.Count > i)
-                    {
-                        @Model.Melhorar[i].Observacao
-                    }
-                </td>
-                <td>
-                    @if (Model.Mudar.Count > i)
-                    {
-                        @Model.Mudar[i].Observacao
-                    }
-                </td>
-                <td>
-                    <form action="~/Feedback/CriarManter">
-                        <input type="hidden" name="pessoaId" value="@Model.Pessoa.PessoaId" />
-                        <button type="submit" class="btn btn-xs btn-warning">
-                            <span class="glyphicon glyphicon-plus"></span>&nbsp;
-                        </button>
-                    </form>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @if (Model.Manter.Count > i)
+                {
+                    @Model.Manter[i].Observacao
+                }
+            </td>
+            <td>
+                @if (Model.Melhorar.Count > i)
+                {
+                    @Model.Melhorar[i].Observacao
+                }
+            </td>
+            <td>
+                @if (Model.Mudar.Count > i)
+                {
+                    @Model.Mudar[i].Observacao
+                }
+            </td>
+            <td>
+                <form action="~/Manter/CriarManter">
+                    <input type="hidden" name="pessoaId" value="@Model.Pessoa.PessoaId" />
+                    <button type="submit" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form action="~/Feedback/Deletar">
+                    <input type="hidden" name="pessoaId" value="@Model.Pessoa.PessoaId" />
+                    <button type="submit" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </form>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
