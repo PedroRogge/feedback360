@@ -149,6 +149,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -163,7 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Pedro.jpg" />
-    <Content Include="Content\André.jpg" />
+    <Content Include="Content\Andre.jpg" />
     <Content Include="Content\Lucas.jpg" />
     <Content Include="Content\Guilherme.jpg" />
     <Content Include="Content\Eduardo.jpg" />
@@ -211,6 +212,10 @@
     <Content Include="Views\Feedback\Carregar.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Feedback\Logar.cshtml" />
+    <Content Include="Views\Feedback\CriarFeedbackManter.cshtml" />
+    <Content Include="Views\Feedback\CriarFeedbackMelhorar.cshtml" />
+    <Content Include="Views\Feedback\CriarFeedbackMudar.cshtml" />
+    <Content Include="Views\Manter\CriarManter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

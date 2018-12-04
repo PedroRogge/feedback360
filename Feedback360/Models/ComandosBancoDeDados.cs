@@ -9,14 +9,14 @@ namespace Feedback360.Models
     {
         private string ConnectionString
         {
-            get { return @"Data Source=senacturmati.database.windows.net;
-                          Initial Catalog=Senac;
-                          User id=senac;
-                          Password=Teste123#"; }
+            //get { return @"Data Source=senacturmati.database.windows.net;
+            //              Initial Catalog=Senac;
+            //              User id=senac;
+            //              Password=Teste123#"; }
 
-            //get { return @"data source=.\SQLEXPRESS;
-            //               initial catalog=Senac;persist security info=True; 
-            //               Integrated Security=SSPI;"; }
+            get { return @"data source=.\SQLEXPRESS;
+                           initial catalog=Senac;persist security info=True; 
+                           Integrated Security=SSPI;"; }
         }
         public List<Mudar> BuscarMudarPorPessoaId(Guid pessoaID)
         {
@@ -24,7 +24,7 @@ namespace Feedback360.Models
             using (SqlConnection con = new SqlConnection(ConnectionString))
             {
                 con.Open();
-                using (SqlCommand command = new SqlCommand("SELECT * FROM Mudar_Andre where PessoaId = @PessoaId", con))
+                using (SqlCommand command = new SqlCommand("SELECT * FROM Mudar where PessoaId = @PessoaId", con))
                 {
                     command.Parameters.Add("@PessoaId", SqlDbType.UniqueIdentifier).Value = pessoaID;
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -48,7 +48,7 @@ namespace Feedback360.Models
             using (SqlConnection con = new SqlConnection(ConnectionString))
             {
                 con.Open();
-                using (SqlCommand command = new SqlCommand("SELECT * FROM Manter_Andre where PessoaId = @PessoaId", con))
+                using (SqlCommand command = new SqlCommand("SELECT * FROM Manter where PessoaId = @PessoaId", con))
                 {
                     command.Parameters.Add("@PessoaId", SqlDbType.UniqueIdentifier).Value = pessoaID;
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -72,7 +72,7 @@ namespace Feedback360.Models
             using (SqlConnection con = new SqlConnection(ConnectionString))
             {
                 con.Open();
-                using (SqlCommand command = new SqlCommand("SELECT * FROM Melhorar_Andre where PessoaId = @PessoaId", con))
+                using (SqlCommand command = new SqlCommand("SELECT * FROM Melhorar where PessoaId = @PessoaId", con))
                 {
                     command.Parameters.Add("@PessoaId", SqlDbType.UniqueIdentifier).Value = pessoaID;
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -96,7 +96,7 @@ namespace Feedback360.Models
             using (SqlConnection con = new SqlConnection(ConnectionString))
             {
                 con.Open();
-                using (SqlCommand command = new SqlCommand("SELECT * FROM Pessoa_Andre where PessoaId = @PessoaId", con))
+                using (SqlCommand command = new SqlCommand("SELECT * FROM Pessoa where PessoaId = @PessoaId", con))
                 {
                     command.Parameters.Add("@PessoaId", SqlDbType.UniqueIdentifier).Value = pessoaID;
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -117,7 +117,7 @@ namespace Feedback360.Models
             using (SqlConnection con = new SqlConnection(ConnectionString))
             {
                 con.Open();
-                using (SqlCommand command = new SqlCommand("SELECT * FROM Pessoa_Andre", con))
+                using (SqlCommand command = new SqlCommand("SELECT * FROM Pessoa", con))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -157,6 +157,60 @@ namespace Feedback360.Models
                 }
             }
             return usuario;
+        }
+        public void InserirFeedbackManter(Manter manter)
+        {
+            using (SqlConnection con = new SqlConnection(ConnectionString))
+            {
+                con.Open();
+                using (SqlCommand command =
+                    new SqlCommand(@"INSERT INTO Manter values (@ManterId,
+                                                                @Observacao,
+                                                                @PessoaId )", con))
+                {
+                    command.Parameters.Add("@ManterId", SqlDbType.UniqueIdentifier).Value = manter.ManterId;
+                    command.Parameters.Add("@Observacao", SqlDbType.VarChar).Value = manter.Observacao;
+                    command.Parameters.Add("@PessoaId", SqlDbType.UniqueIdentifier).Value = manter.PessoaId;
+
+                    command.ExecuteReader();
+                }
+            }
+        }
+        public void InserirFeedbackMelhorar(Melhorar melhorar)
+        {
+            using (SqlConnection con = new SqlConnection(ConnectionString))
+            {
+                con.Open();
+                using (SqlCommand command =
+                    new SqlCommand(@"INSERT INTO Melhorar values (@MelhorarId,
+                                                                @Observacao,
+                                                                @PessoaId )", con))
+                {
+                    command.Parameters.Add("@MelhorarId", SqlDbType.UniqueIdentifier).Value = melhorar.MelhorarId;
+                    command.Parameters.Add("@Observacao", SqlDbType.VarChar).Value = melhorar.Observacao;
+                    command.Parameters.Add("@PessoaId", SqlDbType.UniqueIdentifier).Value = melhorar.PessoaId;
+
+                    command.ExecuteReader();
+                }
+            }
+        }
+        public void InserirFeedbackMudar(Mudar mudar)
+        {
+            using (SqlConnection con = new SqlConnection(ConnectionString))
+            {
+                con.Open();
+                using (SqlCommand command =
+                    new SqlCommand(@"INSERT INTO Mudar values (@MudarId,
+                                                                @Observacao,
+                                                                @PessoaId )", con))
+                {
+                    command.Parameters.Add("@MudarId", SqlDbType.UniqueIdentifier).Value = mudar.MudarId;
+                    command.Parameters.Add("@Observacao", SqlDbType.VarChar).Value = mudar.Observacao;
+                    command.Parameters.Add("@PessoaId", SqlDbType.UniqueIdentifier).Value = mudar.PessoaId;
+
+                    command.ExecuteReader();
+                }
+            }
         }
 
         public static string Criptografar(string valor)
